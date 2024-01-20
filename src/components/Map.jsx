@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -9,6 +9,7 @@ import {
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import Predict from "../Modal/Predict";
+import useAlertContext from "../hooks/useAlertContext";
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -20,9 +21,38 @@ L.Icon.Default.mergeOptions({
 
 const Map = () => {
   const [latlng ,setLatlng]=useState({lat:0  , lng:0})
+  const[data, setData]=useState({})
   const [month , setMonth]=useState("");
   const [day , setDay]=useState("");
   const[result  , setResult]=useState("");
+  const {  dispatch } = useAlertContext();
+  console.log("last",data[0])
+  const{latitude , longitude ,time}=data[0]||{latitude:0 , longitude:0}
+  console.log(latitude , longitude ,time)
+
+  useEffect(() => {
+    const date = new Date(time);
+    const month = date.getMonth() + 1; // getMonth() returns a 0-based month, so we add 1
+    const day = date.getDate();
+  
+    setMonth(month);
+    setDay(day);
+  },[day , month , time]);
+
+  useEffect(() => {
+    const fetchAlert = async () => {
+      const response = await fetch("/api/alert", {
+        method: "GET",
+      });
+      const json = await response.json();
+      if (response.ok) {
+        dispatch({ type: "SET_ALERT", payload: json });
+        setData(json)
+      }
+    };
+    
+    fetchAlert();
+  }, [dispatch]);
 
   const handleLatChange = (e) => {
     setLatlng({ ...latlng, lat: e.target.value });
@@ -55,7 +85,7 @@ let circles;
 
 if (result && result.prediction[0] === 2) {
   // Render red circle
-  circles = [{ latitude: latlng.lat, longitude: latlng.lng, radius: 10000 }];
+  circles = [{ latitude: latitude, longitude: longitude, radius: 10000 }];
   circleStyles = {
     color: "red",
     fillColor: "#f03",
@@ -63,7 +93,7 @@ if (result && result.prediction[0] === 2) {
   };
 } else if (result && result.prediction[0] === 1) {
   // Render yellow circle
-  circles = [{ latitude: latlng.lat, longitude: latlng.lng, radius: 10000 }];
+  circles = [{ latitude: latitude, longitude: longitude, radius: 10000 }];
   circleStyles = {
     color: "yellow",
     fillColor: "yellow",
@@ -93,8 +123,8 @@ if (result && result.prediction[0] === 2) {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetmap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={[latlng.lat, latlng.lng]}>
-          <Popup position={[latlng.lat, latlng.lng]}>
+        <Marker position={[latitude, longitude]}>
+          <Popup position={[latitude, longitude]}>
             <p>hello</p>
           </Popup>
         </Marker>
@@ -121,14 +151,14 @@ if (result && result.prediction[0] === 2) {
       <label htmlFor="Latitude">Latitude:</label>
       <input
         type="text"
-        value={latlng.lat}
+        value={latitude}
         onChange={handleLatChange}
         className="border-2 border-neutral-100 ml-2 text-neutral-800"
       />
       <label htmlFor="longitude" className="">Longitude:</label>
       <input
         type="text"
-        value={latlng.lng}
+        value={longitude}
         onChange={handleLngChange}
         className="border-2 border-neutral-100 ml-2 text-neutral-800"
       />
@@ -151,7 +181,7 @@ if (result && result.prediction[0] === 2) {
 
       />
       </div>
-      <Predict latitude={latlng.lat} longitude={latlng.lng} month={month} day={day} setResult={setResult}/>
+      <Predict latitude={latitude} longitude={longitude} month={month} day={day} setResult={setResult}/>
       
       
       </div>
