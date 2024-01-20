@@ -37,7 +37,7 @@ const Map = () => {
   };
   const mapStyles = {
     width: "100%",
-    height: "100vh",
+    height: "500px",
   };
 
   let circleStyles;
@@ -77,7 +77,7 @@ const Map = () => {
         center={[28.3949, 84.124]}
         zoom={13}
         scrollWheelZoom={false}
-        style={{ mapStyles}}
+        style={mapStyles}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetmap</a> contributors'
@@ -104,42 +104,50 @@ const Map = () => {
 
         <LocationFinderDummy />
       </MapContainer>
-      {/* <div className="mt-4 flex-col p-4">
-      <div>
-      <label htmlFor="Latitude">Latitude</label>
-      <input
-        type="text"
-        value={latlng.lat}
-        className="border-2 border-neutral-700 ml-2"
-      />
-      <label htmlFor="longitude" className="ml-2">Longitude</label>
-      <input
-        type="text"
-        value={latlng.lng}
-        className="border-2 border-neutral-700 ml-2"
-      />
+      <div className="mt-4 flex-col p-4">
+        <div className="flex flex-row items-start justify-evenly">
+          <div>
+            <label htmlFor="Latitude">Latitude</label>
+            <input
+              type="text"
+              value={latlng.lat}
+              className="border-2 border-neutral-700 ml-2"
+            />
+          </div>
+          <div>
+            <label htmlFor="longitude" className="ml-2">
+              Longitude
+            </label>
+            <input
+              type="text"
+              value={latlng.lng}
+              className="border-2 border-neutral-700 ml-2"
+            />
+          </div>
+        </div>
+        <div className="flex flex-row items-start justify-evenly mt-6">
+          <div>
+          <label htmlFor="month">month</label>
+          <input
+            type="number"
+            value={month}
+            className="border-2 border-neutral-700 ml-2"
+            onChange={(e) => setMonth(e.target.value)}
+          />
+          </div>
+          <div>
+          <label htmlFor="day" className="ml-2">
+            day
+          </label>
+          <input
+            type="number"
+            value={day}
+            className="border-2 border-neutral-700 ml-2"
+            onChange={(e) => setDay(e.target.value)}
+          />
+          </div>
+        </div>
       </div>
-
-      <div className="mt-4">
-      <label htmlFor="month">month</label>
-      <input
-        type="number"
-        value={month}
-        className="border-2 border-neutral-700 ml-2"
-        onChange={(e)=>setMonth(e.target.value)}
-      />
-      <label htmlFor="day" className="ml-2">day</label>
-      <input
-        type="number"
-        value={day}
-        className="border-2 border-neutral-700 ml-2"
-        onChange={(e)=>setDay(e.target.value)}
-
-      />
-      </div>
-      
-      
-      </div> */}
 
       <Predict
         latitude={latlng.lat}

@@ -10,7 +10,7 @@ const App = () => {
   const [messages, setMessages] = useState("");
   const { alert, dispatch } = useAlertContext();
   console.log(alert);
-  const count = alert.length;
+  const count = alert?.length;
   console.log(count)
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const App = () => {
     const data = await response.json();
 
     if (data.success) {
-      console.log("SMS sent successfully");
+      console.log("SMS sent successfully hello khaita");
     } else {
       console.error(`Failed to send SMS: ${data.error}`);
     }
@@ -70,8 +70,9 @@ const App = () => {
   return (
     <>
       <div className="grid main grid-cols-10 h-screen">
-        <Navbar count={count} alert={alert} sendSMS={sendSMS} />
-        <div className="col-span-7 h-screen">
+        <Navbar count={count} alert={alert}  />
+        <div className="col-span-7 flex flex-col h-screen mt-20 mr-5 p-8 relative">
+      <button onClick={sendSMS} className="flex justify-end text-neutral-100 px-6 py-3 rounded-md absolute -top-10 right-6 bg-neutral-900">Send SMS</button>
           <Map />
         </div>
         <ToastContainer position="top-center" />
