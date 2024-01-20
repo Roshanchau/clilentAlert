@@ -1,6 +1,6 @@
 import React from "react";
 import { IoIosNotificationsOutline } from "react-icons/io";
-import Input from "./Input";
+// import Input from "./Input";
 
 const Navbar = ({count ,alert }) => {
   console.log(alert)
@@ -33,7 +33,7 @@ const Navbar = ({count ,alert }) => {
           )
         })}
       </div>
-      <Input/>
+      {/* <Input/> */}
     </div>
      
     </>
