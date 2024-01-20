@@ -4,7 +4,7 @@ import {
   TileLayer,
   Marker,
   Popup,
-  Circle,useMapEvents
+  Circle
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
@@ -20,7 +20,6 @@ L.Icon.Default.mergeOptions({
 });
 
 const Map = () => {
-  const [latlng ,setLatlng]=useState({lat:0  , lng:0})
   const [month , setMonth]=useState("");
   const [day , setDay]=useState("");
   const[result  , setResult]=useState("");
@@ -49,16 +48,16 @@ const Map = () => {
   setDay(day);
   }, []);
 
-  const LocationFinderDummy = () => {
-    const map = useMapEvents({
-        click(e) {
-            console.log(e.latlng);
-            setLatlng(e.latlng);
-        },
-    });
-    // map.addLayer(TileLayer)
-    return null;
-};
+//   const LocationFinderDummy = () => {
+//     const map = useMapEvents({
+//         click(e) {
+//             console.log(e.latlng);
+//             setLatlng(e.latlng);
+//         },
+//     });
+//     // map.addLayer(TileLayer)
+//     return null;
+// };
   const mapStyles = {
     width: "100%",
     height: "500px",
@@ -130,7 +129,7 @@ if (result && result.prediction[0] === 2) {
           </Circle>
         ))}
 
-<LocationFinderDummy />
+{/* <LocationFinderDummy /> */}
       </MapContainer>
       <div className="mt-4 flex-col p-4">
       <div>
