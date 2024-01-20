@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 
 function Predict(props) {
@@ -30,6 +30,7 @@ function Predict(props) {
   }
 
   // Handle user input (e.g., user clicks) and collect input data
+
   const handlePredictionClick = () => {
     const inputData = [latitude, longitude , month , day]; // Replace with your actual input data
 
@@ -39,7 +40,7 @@ function Predict(props) {
 
   return (
     <div>
-      {/* <button className="border-2 border-neutral-900 ml-4" onClick={handlePredictionClick}>Get Predictions</button> */}
+      <button className="border-2 border-neutral-900 ml-4" onClick={handlePredictionClick}>Get Predictions</button>
     </div>
   );
 }
