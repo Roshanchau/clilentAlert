@@ -4,7 +4,8 @@ import {
   TileLayer,
   Marker,
   Popup,
-  Circle,useMapEvents
+  Circle,
+  useMapEvents,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
@@ -19,32 +20,28 @@ L.Icon.Default.mergeOptions({
 });
 
 const Map = () => {
-  const [latlng ,setLatlng]=useState({lat:0  , lng:0})
-  const [month , setMonth]=useState("");
-  const [day , setDay]=useState("");
-  const[result  , setResult]=useState("");
+  const [latlng, setLatlng] = useState({ lat: 0, lng: 0 });
+  const [month, setMonth] = useState("");
+  const [day, setDay] = useState("");
+  const [result, setResult] = useState("");
 
- 
   const LocationFinderDummy = () => {
     const map = useMapEvents({
-        click(e) {
-            console.log(e.latlng);
-            setLatlng(e.latlng);
-        },
+      click(e) {
+        console.log(e.latlng);
+        setLatlng(e.latlng);
+      },
     });
     // map.addLayer(TileLayer)
     return null;
-};
+  };
   const mapStyles = {
     width: "100%",
-    height: "500px",
-    border: "1px solid #ccc",
-    borderRadius: "5px",
+    height: "100vh",
   };
 
   let circleStyles;
   let circles;
-
 
   if (result === "2") {
     circles = [{ latitude: latlng.lat, longitude: latlng.lng, radius: 10000 }];
@@ -69,16 +66,18 @@ const Map = () => {
   // Function to handle circle click event
   const handleCircleClick = (e, circleData) => {
     const curPos = e.latlng;
-    alert(`Clicked on circle with radius ${circleData.radius} at: ${curPos.lat} : ${curPos.lng}`);
+    alert(
+      `Clicked on circle with radius ${circleData.radius} at: ${curPos.lat} : ${curPos.lng}`
+    );
   };
 
   return (
     <div>
       <MapContainer
-        center={ [28.3949, 84.1240]}
+        center={[28.3949, 84.124]}
         zoom={13}
         scrollWheelZoom={false}
-        style={mapStyles}
+        style={{ mapStyles}}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetmap</a> contributors'
@@ -100,12 +99,10 @@ const Map = () => {
             eventHandlers={{
               click: (e) => handleCircleClick(e, circleData), // Attach click event handler
             }}
-          >
-
-          </Circle>
+          ></Circle>
         ))}
 
-<LocationFinderDummy />
+        <LocationFinderDummy />
       </MapContainer>
       {/* <div className="mt-4 flex-col p-4">
       <div>
@@ -144,8 +141,14 @@ const Map = () => {
       
       </div> */}
 
-      <Predict latitude={latlng.lat} longitude={latlng.lng} month={month} day={day} setResult={setResult}/>
-          </div>
+      <Predict
+        latitude={latlng.lat}
+        longitude={latlng.lng}
+        month={month}
+        day={day}
+        setResult={setResult}
+      />
+    </div>
   );
 };
 

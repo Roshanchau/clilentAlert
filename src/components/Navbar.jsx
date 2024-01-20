@@ -5,7 +5,7 @@ const Navbar = ({count ,alert , sendSMS}) => {
   console.log(alert)
   return (
     <>
-    <div className="justify-center items-center col-span-3">
+    <div className="justify-center items-center col-span-3 h-screen">
     <header className="">
         <nav className="flex flex-row  justify-between  p-10  ">
           {/* logo */}

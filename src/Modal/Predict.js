@@ -39,7 +39,7 @@ function Predict(props) {
 
   return (
     <div>
-      <button className="border-2 border-neutral-900 ml-4" onClick={handlePredictionClick}>Get Predictions</button>
+      {/* <button className="border-2 border-neutral-900 ml-4" onClick={handlePredictionClick}>Get Predictions</button> */}
     </div>
   );
 }

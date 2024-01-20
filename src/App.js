@@ -69,9 +69,9 @@ const App = () => {
 
   return (
     <>
-      <div className="grid main grid-cols-10 ">
+      <div className="grid main grid-cols-10 h-screen">
         <Navbar count={count} alert={alert} sendSMS={sendSMS} />
-        <div className="col-span-7">
+        <div className="col-span-7 h-screen">
           <Map />
         </div>
         <ToastContainer position="top-center" />
