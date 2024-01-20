@@ -8,8 +8,10 @@ import useAlertContext from "./hooks/useAlertContext";
 const App = () => {
   // Your frontend component
   const [messages, setMessages] = useState("");
-  const{alert,dispatch}=useAlertContext();
-  console.log(alert)
+  const { alert, dispatch } = useAlertContext();
+  console.log(alert);
+  const count = alert.length;
+  console.log(count)
 
   useEffect(() => {
     const fetchAlert = async () => {
@@ -67,22 +69,12 @@ const App = () => {
 
   return (
     <>
-      <div>
-        <Navbar  />
-        <div className="grid grid-cols-2">
+      <div className="grid main grid-cols-10 ">
+        <Navbar count={count} alert={alert} sendSMS={sendSMS} />
+        <div className="col-span-7">
           <Map />
-          <div className=" flex flex-col justify-center items-center">
-            <h2 className="mb-4 text-5xl font-semibold text-red-800">Warning!!</h2>
-            <h1 className="text-4xl bg-red-700 p-10 w-[80%] text-neutral-100 flex justify-center items-center">
-              {messages}
-            </h1>
-            <button onClick={sendSMS} className="mt-4 bg-neutral-900 text-neutral-100 px-6 py-3 rounded-lg">send sms</button>
-          </div>
         </div>
-        <ToastContainer
-          position="top-center"
-          autoClose={5001}
-        />
+        <ToastContainer position="top-center" />
       </div>
     </>
   );

@@ -28,7 +28,7 @@ const Map = () => {
   const LocationFinderDummy = () => {
     const map = useMapEvents({
         click(e) {
-            console.log("this is latlong",e.latlng);
+            console.log(e.latlng);
             setLatlng(e.latlng);
         },
     });
@@ -107,7 +107,7 @@ const Map = () => {
 
 <LocationFinderDummy />
       </MapContainer>
-      <div className="mt-4 flex-col p-4">
+      {/* <div className="mt-4 flex-col p-4">
       <div>
       <label htmlFor="Latitude">Latitude</label>
       <input
@@ -142,7 +142,7 @@ const Map = () => {
       </div>
       
       
-      </div>
+      </div> */}
 
       <Predict latitude={latlng.lat} longitude={latlng.lng} month={month} day={day} setResult={setResult}/>
           </div>

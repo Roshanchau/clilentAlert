@@ -10,7 +10,7 @@ export const alertReducer=(state, action)=>{
             };
         case "CREATE_ALERT":
             return{
-                alert:[ ...state.table,action.payload],
+                alert:[ ...state.alert,action.payload],
             };
         default:
               return state;
