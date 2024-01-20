@@ -4,6 +4,7 @@ import Map from "./components/Map";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useAlertContext from "./hooks/useAlertContext";
+import { marker } from "leaflet";
 
 const App = () => {
   // Your frontend component
@@ -27,7 +28,7 @@ const App = () => {
     fetchAlert();
     notify();
   }, [dispatch]);
-  const notify = () => toast(messages);
+  const notify = () => toast(messages?messages:"something was detected");
 
   const sendSMS = async () => {
     const response = await fetch("/api/sendSMS", {
@@ -69,10 +70,10 @@ const App = () => {
 
   return (
     <>
-      <div className="grid main grid-cols-10 h-screen">
+      <div className="grid main grid-cols-10 ">
         <Navbar count={count} alert={alert}  />
-        <div className="col-span-7 flex flex-col h-screen mt-20 mr-5 p-8 relative">
-      <button onClick={sendSMS} className="flex justify-end text-neutral-100 px-6 py-3 rounded-md absolute -top-10 right-6 bg-neutral-900">Send SMS</button>
+        <div className="col-span-7 flex flex-col h-screen mt-20 mr-5 p-2 relative">
+      <button onClick={sendSMS} className="flex justify-end text-neutral-100 px-6 py-3 rounded-md absolute -top-14 right-6 bg-neutral-900">Send SMS</button>
           <Map/>
         </div>
         <ToastContainer position="top-center" />

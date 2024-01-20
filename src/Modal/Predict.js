@@ -39,8 +39,8 @@ function Predict(props) {
   };
 
   return (
-    <div>
-      <button className="border-2 border-neutral-900 ml-4" onClick={handlePredictionClick}>Get Predictions</button>
+    <div className='flex items-center justify-center'>
+      <button className="bg-blue-600 rounded-md text-neutral-100 px-6 py-3" onClick={handlePredictionClick}>Get Predictions</button>
     </div>
   );
 }

@@ -24,6 +24,15 @@ const Map = () => {
   const [day , setDay]=useState("");
   const[result  , setResult]=useState("");
 
+  const handleLatChange = (e) => {
+    setLatlng({ ...latlng, lat: e.target.value });
+  };
+
+  const handleLngChange = (e) => {
+    setLatlng({ ...latlng, lng: e.target.value });
+  };
+
+
   const LocationFinderDummy = () => {
     const map = useMapEvents({
         click(e) {
@@ -107,44 +116,46 @@ if (result && result.prediction[0] === 2) {
 
 <LocationFinderDummy />
       </MapContainer>
-      <div className="mt-4 flex-col p-4">
-      <div>
-      <label htmlFor="Latitude">Latitude</label>
+      <div className="mt-4 flex justify-evenly p-4 ">
+      <div className=" flex flex-col gap-2">
+      <label htmlFor="Latitude">Latitude:</label>
       <input
         type="text"
         value={latlng.lat}
-        className="border-2 border-neutral-700 ml-2"
+        onChange={handleLatChange}
+        className="border-2 border-neutral-100 ml-2 text-neutral-800"
       />
-      <label htmlFor="longitude" className="ml-2">Longitude</label>
+      <label htmlFor="longitude" className="">Longitude:</label>
       <input
         type="text"
         value={latlng.lng}
-        className="border-2 border-neutral-700 ml-2"
+        onChange={handleLngChange}
+        className="border-2 border-neutral-100 ml-2 text-neutral-800"
       />
       </div>
 
-      <div className="mt-4">
-      <label htmlFor="month">month</label>
+      <div className=" flex flex-col gap-2">
+      <label htmlFor="month">month:</label>
       <input
         type="number"
         value={month}
-        className="border-2 border-neutral-700 ml-2"
+        className="border-2 border-neutral-100 ml-2 text-neutral-800"
         onChange={(e)=>setMonth(e.target.value)}
       />
-      <label htmlFor="day" className="ml-2">day</label>
+      <label htmlFor="day" className="">day:</label>
       <input
         type="number"
         value={day}
-        className="border-2 border-neutral-700 ml-2"
+        className="border-2 border-neutral-100 ml-2 text-neutral-800"
         onChange={(e)=>setDay(e.target.value)}
 
       />
       </div>
+      <Predict latitude={latlng.lat} longitude={latlng.lng} month={month} day={day} setResult={setResult}/>
       
       
       </div>
 
-      <Predict latitude={latlng.lat} longitude={latlng.lng} month={month} day={day} setResult={setResult}/>
           </div>
   );
 };
