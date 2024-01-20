@@ -1,5 +1,6 @@
 import React from "react";
 import { IoIosNotificationsOutline } from "react-icons/io";
+import Input from "./Input";
 
 const Navbar = ({count ,alert }) => {
   console.log(alert)
@@ -7,7 +8,7 @@ const Navbar = ({count ,alert }) => {
     <>
     <div className="justify-center items-center col-span-3 ">
     <header className="">
-        <nav className="flex flex-row  justify-between  p-10  ">
+        <nav className="flex flex-row  justify-between  p-8  ">
           {/* logo */}
           <div className="">
             <h1 className="text-2xl">Alert</h1>
@@ -23,7 +24,7 @@ const Navbar = ({count ,alert }) => {
           </div>
         </nav>
       </header>
-      <div className=" p-10">
+      <div className=" p-8">
         {alert?.slice(0, 7).map((item)=>{
           return(
             <div index={item.div} className="border-2 border-slate-700 border-opacity-50 mt-4 flex justify-center items-center rounded-lg ">
@@ -32,6 +33,7 @@ const Navbar = ({count ,alert }) => {
           )
         })}
       </div>
+      <Input/>
     </div>
      
     </>

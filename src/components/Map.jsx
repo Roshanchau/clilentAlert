@@ -24,6 +24,7 @@ const Map = () => {
   const [day , setDay]=useState("");
   const[result  , setResult]=useState("");
   const { alert, dispatch } = useAlertContext();
+  console.log(alert)
   const{latitude , longitude , time}=alert&&alert[0]
 
   console.log("this is alert", latitude , longitude , time);
@@ -46,7 +47,7 @@ const Map = () => {
 
   setMonth(month);
   setDay(day);
-  }, []);
+  }, [month, day , time ,dispatch]);
 
 //   const LocationFinderDummy = () => {
 //     const map = useMapEvents({
@@ -131,7 +132,7 @@ if (result && result.prediction[0] === 2) {
 
 {/* <LocationFinderDummy /> */}
       </MapContainer>
-      <div className="mt-4 flex-col p-4">
+      {/* <div className="mt-4 flex-col p-4">
       <div>
       <label htmlFor="Latitude">Latitude</label>
       <input
@@ -166,7 +167,7 @@ if (result && result.prediction[0] === 2) {
       </div>
       
       
-      </div>
+      </div> */}
 
       <Predict latitude={latitude} longitude={longitude} month={month} day={day} setResult={setResult}/>
           </div>
